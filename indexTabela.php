@@ -1,5 +1,7 @@
 <?php
-//require_once('indexCampo.php');
+require_once('DataBase.php');
+$dataBase = new DataBase();
+
 ?>
 
 <!DOCTYPE HTML>
@@ -7,11 +9,7 @@
     <head>  
         <meta charset="utf-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <style>
-            .form-group{
-                padding: 5px;
-            }
-        </style>
+        
     </head>
     <body>
         <h1>Adicionar Tabela</h1>
@@ -19,9 +17,11 @@
         <form id="add-tabela" method="POST">
             <div id="formulario">
                 <div class="form-group">
+                <button type="button" id="add-campo"> ✖️ TABELA</button>
+                <br><br>
                     <label>Tabela: </label>
-                    <input type="text" name="nomeTabela[]" placeholder="Digite o nome da tabela">
-                    <button type="button" id="add-campo"> ✖️​ </button>
+                    <input type="text" id = 'tab' name="nomeTabela[]" placeholder="Digite o nome da tabela">
+                    <a href="Icampo.php">Adicionar campos</a>
                 </div>
             </div>
             <!--<div class="form-group">
@@ -36,7 +36,8 @@
                 $('#add-campo').click(function () {
                     cont++;
                     //https://api.jquery.com/append/
-                    $('#formulario').append('<div class="form-group" id="campo' + cont + '"> <label>Tabela: </label><input type="text" name="nomeTabela[]" placeholder="Digite o nome da tabela"> <button type="button" id="' + cont + '" class="btn-apagar"> ❌​ </button></div>');
+                    $('#formulario').append('<div class="form-group" id="campo' + cont + '"> <label>Tabela: </label><input type="text" name="nomeTabela[]" placeholder="Digite o nome da tabela"><a href="indexCampo.php">Adicionar campos</a> <button type="button" id="' + cont + '" class="btn-apagar"> ❌​ </button></div>');
+
                 });
 
                 $('form').on('click', '.btn-apagar', function () {
@@ -66,9 +67,10 @@
                 }
             //});
         </script>
-
+    
+       
 <br>
-<a href="indexCampo.php">Adicionar campos</a>
+
 
 
     </body>

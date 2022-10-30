@@ -1,5 +1,4 @@
 <?php
-
 require_once('Campo.php');
 require_once('Tabela.php');
 require_once('DataBase.php');
@@ -76,22 +75,27 @@ require_once('Sgbd.php');
             $dataBase->setNome($nome);
             //print_r($dataBase);
             echo "<br>";
+
+           
         ?>
     
-  <a href="indexTabela.php">Adicionar tabelas</a>
+    <a href="Itabela.php"> Adicionar tabelas</a>
+    
 <br><br>
 
   <form action= "" method="GET">
   <fieldset>
         <br><b>EXECUTADOR:</b><br><br>
-        <label for="nomeSgbd">nomeSgbd SGBD:</label>
-        <input type="text" id="nomeSgbd" name="nomeSgbd">
+        <label for="nomeSgbd">Nome SGBD:</label>
+        <input type="text" id="nomeSgbd" name="nomeSgbd" value="mysql" readonly><br><br>
         <?php
 
-        $sgbd = new Sgbd();
-
             $nomeSgbd = isset($_GET['nomeSgbd']) ? $_GET['nomeSgbd'] : "";
-            $sgbd->setNome($nome);
+            
+            $sgbd = new Sgbd();
+
+            $nomeSgbd = $_GET['nomeSgbd'];
+            $sgbd->setNome($nomeSgbd);
             echo "<br><br>";
             $e = new Executador();
             $e->setConn($conn);
@@ -100,12 +104,29 @@ require_once('Sgbd.php');
             print_r($e);
             echo "<br><br>";
 
+            //Apenas escreve o Executador em formato Json na tela
             echo json_encode($e);
+            
+            //Salva Executador em um arquivo Json
+            $arquivo = __DIR__ . '/arquivo.json';
+            file_put_contents($arquivo, json_encode($e));
+
+            $array = array();
+
+            array_push($array,$conn->setUsuario($usuario),
+              $conn->setSenha($senha),
+              $conn->setHost($host),
+              $conn->setPorta($porta),
+              $dataBase->setNome($nome),
+              $sgbd->setNome($nomeSgbd));
+
+              
+
         ?>
  
   </fieldset>
   </fieldset><br><br>
-  <input type="submit" value="Enviar formulário"><br><br>
+  <input type="submit" value="Salvar dados"><br><br>
   </fieldset>
 
   </form>
