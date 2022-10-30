@@ -79,7 +79,7 @@ require_once('Sgbd.php');
            
         ?>
     
-    <a href="Itabela.php"> Adicionar tabelas</a>
+   
     
 <br><br>
 
@@ -111,19 +111,10 @@ require_once('Sgbd.php');
             $arquivo = __DIR__ . '/arquivo.json';
             file_put_contents($arquivo, json_encode($e));
 
-            $array = array();
-
-            array_push($array,$conn->setUsuario($usuario),
-              $conn->setSenha($senha),
-              $conn->setHost($host),
-              $conn->setPorta($porta),
-              $dataBase->setNome($nome),
-              $sgbd->setNome($nomeSgbd));
-
-              
-
         ?>
- 
+        <br><br>
+  <a href="Itabela.php?usuario=<?php echo $usuario; ?>&senha=<?php echo $senha; ?> &host=<?php echo $host; ?>&porta=<?php echo $porta; ?>&porta=<?php echo $porta; ?>&nome=<?php echo $nome; ?>&nomeSgbd=<?php echo $nomeSgbd; ?>"> Adicionar tabelas</a>
+  
   </fieldset>
   </fieldset><br><br>
   <input type="submit" value="Salvar dados"><br><br>

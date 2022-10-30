@@ -32,18 +32,22 @@ require_once('Sgbd.php');
 
         <?php
 
-            $tabela = isset($_GET['tab']) ? $_GET['tab'] : "";
+            $tab = isset($_GET['tab']) ? $_GET['tab'] : "";
             //print_r($tabela); 
-
             $usuario = isset($_GET['usuario']) ? $_GET['usuario'] : "";
             $senha = isset($_GET['senha']) ? $_GET['senha'] : "";
+            $host = isset($_GET['host']) ? $_GET['host'] : "";
+            $porta = isset($_GET['porta']) ? $_GET['porta'] : "";
+            $nome = isset($_GET['nome']) ? $_GET['nome'] : "";
+            $nomeSgbd = isset($_GET['nomeSgbd']) ? $_GET['nomeSgbd'] : "";
 
-            echo $usuario . " ". $senha;
+            echo $usuario . " ". $senha . " ".$host . " ". $porta . " ".$nome . " ". $nomeSgbd . " ";
+            
 
 
         ?>
 
-<a href="Icampo.php?tab='<?php echo $tabela; ?>">Adicionar campos</a>
+<a href="Icampo.php?tab=<?php echo $tab; ?>">Adicionar campos</a>
   </fieldset><br><br>
   <input type="submit" value="Salvar dados"><br><br>
   </fieldset>

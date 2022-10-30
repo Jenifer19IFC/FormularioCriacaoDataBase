@@ -1,1 +1,1 @@
-{"conn":{"usuario":"root","senha":"vazio","porta":"ds","host":"local"},"db":{"nome":"Duda","collation":"utf8mb4_general_ci","characterset":"utf8mb4","listTabelas":[]},"sgbd":{"nome":"mysql"}}
+{"conn":{"usuario":"root","senha":"vazio","porta":"3306","host":"127.0.0.0.1"},"db":{"nome":"gato","collation":"utf8mb4_general_ci","characterset":"utf8mb4","listTabelas":[]},"sgbd":{"nome":"mysql"}}

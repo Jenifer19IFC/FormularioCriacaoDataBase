@@ -55,7 +55,7 @@ require_once('Sgbd.php');
             $nomeTabela = isset($_GET['tab']) ? $_GET['tab'] : "";
             echo $nomeTabela;
 
-            print_r($dataBase);
+            //print_r($dataBase);
             
         ?>
 
