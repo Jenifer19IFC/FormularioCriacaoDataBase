@@ -1,6 +1,6 @@
 <?php
 
-require_once('Campo.php');
+/*require_once('Campo.php');
 require_once('Tabela.php');
 require_once('DataBase.php');
 require_once('Conn.php');
@@ -54,5 +54,5 @@ require_once('Executador.php');
     fclose($file);
 
     echo "<br><br>Dados salvos no Json com sucesso!"
-
+*/
 ?>

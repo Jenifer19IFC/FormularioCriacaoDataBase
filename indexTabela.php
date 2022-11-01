@@ -1,5 +1,5 @@
 <?php
-require_once('DataBase.php');
+/*require_once('DataBase.php');
 $dataBase = new DataBase();
 
 ?>

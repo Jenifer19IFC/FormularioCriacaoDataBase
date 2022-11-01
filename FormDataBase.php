@@ -5,6 +5,9 @@ require_once('DataBase.php');
 require_once('Conn.php');
 require_once('Executador.php');
 require_once('Sgbd.php');
+
+session_start();
+
 // Tabelas e campos no principal
 ?>
 
@@ -44,7 +47,15 @@ require_once('Sgbd.php');
             $porta = isset($_GET['porta']) ? $_GET['porta'] : "";
             $usuario = isset($_GET['usuario']) ? $_GET['usuario'] : "";
             $senha = isset($_GET['senha']) ? $_GET['senha'] : "";
-          
+
+            //Criar um SESION para cada um
+            $_SESSION['usuario'] = $usuario;
+            $_SESSION['senha'] = $senha;
+            $_SESSION['host'] = $host;
+            $_SESSION['porta'] = $porta;
+           
+            //$usuario1 = $_SESSION['usuario'];//pega
+
             /*echo "<br><br><b>Dados coletados do formulário</b>";
             echo "<br><br><b>Host:</b>".$host.'<br>';
             echo "<br><b>Porta:</b> ".$porta.'<br>';
@@ -59,23 +70,26 @@ require_once('Sgbd.php');
             $conn->setPorta($porta);
             //print_r($conn);
             //echo "<br><br>";
+
+
         ?>
 
   <form action="" method="GET">
       <fieldset>
         <br><b>DATABASE:</b><br><br>
-        <label for="nome">Nome DataBase:</label>
-        <input type="text" id="nome" name="nome"><br><br>
+        <label for="nomeDb">Nome DataBase:</label>
+        <input type="text" id="nomeDb" name="nomeDb"><br><br>
 
         <?php
 
-            $nome = isset($_GET['nome']) ? $_GET['nome'] : "";
+            $nomeDb = isset($_GET['nomeDb']) ? $_GET['nomeDb'] : "";
            
             $dataBase = new DataBase();
-            $dataBase->setNome($nome);
+            $dataBase->setNome($nomeDb);
             //print_r($dataBase);
             echo "<br>";
 
+            $_SESSION['nomeDb'] = $nomeDb;
            
         ?>
     
@@ -104,6 +118,8 @@ require_once('Sgbd.php');
             print_r($e);
             echo "<br><br>";
 
+            $_SESSION['nomeSgbd'] = $nomeSgbd;
+
             //Apenas escreve o Executador em formato Json na tela
             echo json_encode($e);
             
@@ -113,7 +129,7 @@ require_once('Sgbd.php');
 
         ?>
         <br><br>
-  <a href="Itabela.php?usuario=<?php echo $usuario; ?>&senha=<?php echo $senha; ?> &host=<?php echo $host; ?>&porta=<?php echo $porta; ?>&porta=<?php echo $porta; ?>&nome=<?php echo $nome; ?>&nomeSgbd=<?php echo $nomeSgbd; ?>"> Adicionar tabelas</a>
+  <a href="Itabela.php"> Adicionar tabelas</a>
   
   </fieldset>
   </fieldset><br><br>

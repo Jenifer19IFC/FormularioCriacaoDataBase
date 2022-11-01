@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <title>Formm aula</title>
@@ -29,7 +29,7 @@
     
     <script>
 
-      var cont = 1;
+     /* var cont = 1;
 
       $( "#add-tabela" ).click(function() {
         cont++;

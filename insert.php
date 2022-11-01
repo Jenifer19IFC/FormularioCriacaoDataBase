@@ -1,6 +1,6 @@
 <?php
 
-include_once 'Conexao.php';
+/*include_once 'Conexao.php';
 
 $titulos = $_POST["nomeTabela"];
 
@@ -21,4 +21,4 @@ if ($cont_insert) {
     echo "<p style='color:green;'>Cadastrado com Sucesso</p>";
 } else {
     echo "<p style='color:red;'>Erro ao cadastrar</p>";
-}
+}*/

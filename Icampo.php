@@ -1,11 +1,12 @@
 <?php
-require_once('Campo.php');
+/*require_once('Campo.php');
 require_once('Tabela.php');
 require_once('DataBase.php');
 require_once('Conn.php');
 require_once('Executador.php');
 require_once('Sgbd.php');
 // Tabelas e campos no principal
+
 
 ?>
 

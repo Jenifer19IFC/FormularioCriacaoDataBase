@@ -4,20 +4,11 @@ class Tabela{
 
     public $nome;
     public $listCampos = array();
-    public $db;
+    
 
     function __concstruct(){
-        $this->db = new DataBase();
     }
     
-    function getDb(){
-        return $this->db;
-    }
-    function setDb($db){
-        $this->db = $db;
-    }
-
-
     function getNome(){
         return $this->nome;
     }

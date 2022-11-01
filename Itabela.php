@@ -5,6 +5,36 @@ require_once('DataBase.php');
 require_once('Conn.php');
 require_once('Executador.php');
 require_once('Sgbd.php');
+
+session_start();
+
+$usuario = $_SESSION['usuario'];
+$senha = $_SESSION['senha'];
+$host = $_SESSION['host'];
+$porta = $_SESSION['porta'];
+$nomeDb = $_SESSION['nomeDb'];
+$nomeSgbd = $_SESSION['nomeSgbd'];
+
+print($usuario);
+echo "<br>";
+print($senha);
+echo "<br>";
+print($host);
+echo "<br>";
+print($porta);
+echo "<br>";
+print($nomeDb);
+echo "<br>";
+print($nomeSgbd);
+
+
+//$s = $_SESSION['usuario'];
+//var_dump($s);
+//$_SESSION['tab']=array(); 
+
+
+$contTab = 0;
+
 // Tabelas e campos no principal
 ?>
 
@@ -27,31 +57,52 @@ require_once('Sgbd.php');
         <br><b>TABELA:</b><br><br>
       
         <label for="tab">Nome tabela:</label>
-        <input type="text" id="tab" name="tab"><br><br>
+        <input type="text" id="tab" name="tab[]"><br><br>
         
 
         <?php
 
             $tab = isset($_GET['tab']) ? $_GET['tab'] : "";
-            //print_r($tabela); 
-            $usuario = isset($_GET['usuario']) ? $_GET['usuario'] : "";
-            $senha = isset($_GET['senha']) ? $_GET['senha'] : "";
-            $host = isset($_GET['host']) ? $_GET['host'] : "";
-            $porta = isset($_GET['porta']) ? $_GET['porta'] : "";
-            $nome = isset($_GET['nome']) ? $_GET['nome'] : "";
-            $nomeSgbd = isset($_GET['nomeSgbd']) ? $_GET['nomeSgbd'] : "";
+            //echo $tab;
 
-            echo $usuario . " ". $senha . " ".$host . " ". $porta . " ".$nome . " ". $nomeSgbd . " ";
+            $_SESSION['tab'] = array();
+           
+            //$contTab++;
+
+            if (empty($_SESSION['tab'])) {
+                $_SESSION['tab'] = [];
+            }
+            array_push($_SESSION['tab'],$_GET);
+
+            echo "CONTADOR: " .$contTab . "<Br><br>";
+            var_dump($_SESSION['tab']);
+           
+            //for($i = 0 ; $i < count($_SESSION['tab']) ; $i++) {
+            //      print_r($_SESSION['tab'][$i]);
+            //} 
             
-
+           
 
         ?>
 
-<a href="Icampo.php?tab=<?php echo $tab; ?>">Adicionar campos</a>
+  <a href="indexCampo.php">Adicionar campos</a>
   </fieldset><br><br>
-  <input type="submit" value="Salvar dados"><br><br>
+  <input type="submit" id = "sub" value="Salvar dados"><br><br>
+
+  <a href="Itabela.php"> Adicionar mais tabelas</a>
+
   </fieldset>
 
+  <script>
+    contTab = 0;
+
+      $('#sub').click(function () {
+          contTab++; 
+      });
+
+      console.log($contTab);
+
+  </script>
   </form>
   </form>
     </form> 
