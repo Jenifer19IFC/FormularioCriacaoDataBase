@@ -123,9 +123,16 @@ session_start();
             //Apenas escreve o Executador em formato Json na tela
             echo json_encode($e);
             
+            $executadorSerealizado = serialize($e);
+            $_SESSION['executadorObject'] = $executadorSerealizado;
+
+            var_dump($e);
+            echo "<br><br>";
+            var_dump($executadorSerealizado);
+
             //Salva Executador em um arquivo Json
-            $arquivo = __DIR__ . '/arquivo.json';
-            file_put_contents($arquivo, json_encode($e));
+            //$arquivo = __DIR__ . '/arquivo.json';
+            //file_put_contents($arquivo, json_encode($e));
 
         ?>
         <br><br>

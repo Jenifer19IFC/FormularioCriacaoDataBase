@@ -27,12 +27,6 @@ print($nomeDb);
 echo "<br>";
 print($nomeSgbd);
 
-
-//$s = $_SESSION['usuario'];
-//var_dump($s);
-//$_SESSION['tab']=array(); 
-
-
 $contTab = 0;
 
 // Tabelas e campos no principal
@@ -57,32 +51,41 @@ $contTab = 0;
         <br><b>TABELA:</b><br><br>
       
         <label for="tab">Nome tabela:</label>
-        <input type="text" id="tab" name="tab[]"><br><br>
+        <input type="text" id="tab" name="tab"><br><br>
         
 
         <?php
 
-            $tab = isset($_GET['tab']) ? $_GET['tab'] : "";
-            //echo $tab;
+          $tab = isset($_GET['tab']) ? $_GET['tab'] : "";
 
-            $_SESSION['tab'] = array();
-           
-            //$contTab++;
 
-            if (empty($_SESSION['tab'])) {
-                $_SESSION['tab'] = [];
-            }
-            array_push($_SESSION['tab'],$_GET);
+           //if (empty($_SESSION['tab'])) {
+            //    $_SESSION['tab'] = [];
+            //}
 
-            echo "CONTADOR: " .$contTab . "<Br><br>";
-            var_dump($_SESSION['tab']);
-           
-            //for($i = 0 ; $i < count($_SESSION['tab']) ; $i++) {
-            //      print_r($_SESSION['tab'][$i]);
-            //} 
+          $tabela = new Tabela();
+          $tabela->setNome($tab);
+
+          $tabelaSerializada = serialize($tabela);
+          
+          $_SESSION['tabela'] = $tabelaSerializada;
+          var_dump($tabela);
+          echo "<br>";
+          var_dump($tabelaSerializada);
+
+         
+
             
-           
+            //var_dump($tabela);
+            //array_push($_SESSION['tab'],$_GET['tab']);
+            //Array push depois dos campos
 
+           echo "<br><br>";
+            
+            //for($i = 0 ; $i < count($_SESSION['tab']) ; $i++) {
+            //     print_r($_SESSION['tab'][$i]);
+            //} 
+    
         ?>
 
   <a href="indexCampo.php">Adicionar campos</a>

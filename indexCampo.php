@@ -1,3 +1,20 @@
+<?php
+session_start();
+require_once('Tabela.php');
+require_once('Executador.php');
+require_once('Sgbd.php');
+require_once('Conn.php');
+require_once('DataBase.php');
+require_once('Campo.php');
+
+$executadorObject = unserialize($_SESSION['executadorObject']);
+
+echo "<br><br>";
+$tabela = unserialize($_SESSION['tabela']);
+echo $tabela->getNome();
+
+?>
+
 <!DOCTYPE HTML>
 <html lang="pt-br">  
     <head>  
@@ -20,15 +37,15 @@
                 <div class="form-groupC">
                 <button type="button" id="add-campo"> ✖️ CAMPO</button><br><br>
                     <label>Nome do campo: </label>
-                    <input type="text" name="nomeCampo[]" placeholder="Digite o nome do campo"><br>
+                    <input type="text" name="nomeCampo" placeholder="Digite o nome do campo"><br>
                     <label>Tipo: </label>   
                     <select name="tipos">
-                        <option value="1">int</option>
-                        <option value="2">varchar(45)</option>
-                        <option value="3">double</option>
+                        <option value="int">int</option>
+                        <option value="varchar(45)">varchar(45)</option>
+                        <option value="double">double</option>
                     </select>
-                    <br><br><input type="checkbox" name="op1" value="pk"> Primary Key
-                    <br><input type="checkbox" name="op2" value="nn"> Não nulo
+                        <br><br><input type="checkbox" name="op1" value="pk"> Primary Key
+                        <br><input type="checkbox" name="op2" value="nn"> Não nulo
                         <br><input type="checkbox" name="op3" value="uq"> Único
                         <br><input type="checkbox" name="op4" value="b"> Binário
                         <br><input type="checkbox" name="op5" value="un"> Não assinado
@@ -42,6 +59,92 @@
                 <br><input type="submit" value="Salvar dados"><br><br>
             </div>
         </form>
+
+        <?php
+
+            $nomeCampo = isset($_GET['nomeCampo']) ? $_GET['nomeCampo'] : "";
+            var_dump($nomeCampo);
+            echo "<br>";
+            $tipo = isset($_GET['tipos']) ? $_GET['tipos'] : "";
+            echo $tipo;
+            echo "<br>";
+            $op1= isset($_GET['op1']) ? $_GET['op1'] : "";
+            echo $op1;
+            echo "<br>";
+            $op2= isset($_GET['op2']) ? $_GET['op2'] : "";
+            echo $op2;
+            echo "<br>";
+            $op2= isset($_GET['op2']) ? $_GET['op2'] : "";
+            echo $op2;
+            echo "<br>";
+            $op3= isset($_GET['op3']) ? $_GET['op3'] : "";
+            echo $op3;
+            echo "<br>";
+            $op4= isset($_GET['op4']) ? $_GET['op4'] : "";
+            echo $op4;
+            echo "<br>";
+            $op5= isset($_GET['op5']) ? $_GET['op5'] : "";
+            echo $op5;
+            echo "<br>";
+            $op6= isset($_GET['op6']) ? $_GET['op6'] : "";
+            echo $op6;
+            echo "<br>";
+            $op7= isset($_GET['op7']) ? $_GET['op7'] : "";
+            echo $op7;
+            echo "<br>";
+            $op8= isset($_GET['op8']) ? $_GET['op8'] : "";
+            echo $op8;
+
+            $campo = new Campo();
+            $campo->setNome($nomeCampo);
+            $campo->setTipo($tipo);
+            $campo->setPk($op1);
+            $campo->setNn($op2);
+            $campo->setUq($op3);
+            $campo->setB($op4);
+            $campo->setUn($op5);
+            $campo->setZf($op6);
+            $campo->setAi($op7);
+            $campo->setG($op8);
+            
+            var_dump($campo);
+            
+            if(!empty($tabela->listCampos)){
+                array_push($tabela->listCampos,$campo);
+            }else{
+                $campo = new Campo();
+                $campo->setNome($nomeCampo);
+                $campo->setTipo($tipo);
+                $campo->setPk($op1);
+                $campo->setNn($op2);
+                $campo->setUq($op3);
+                $campo->setB($op4);
+                $campo->setUn($op5);
+                $campo->setZf($op6);
+                $campo->setAi($op7);
+                $campo->setG($op8);
+                array_push($tabela->listCampos,$campo);
+            }
+           
+            echo "<br>Minha tabela<br>";
+            var_dump($tabela);
+
+            if(empty( $executadorObject->db->listTabelas)){
+                array_push($executadorObject->db->listTabelas,$tabela);
+            }else{
+                $tab = new Tabela();
+                $tab = $tabela;
+                array_push($executadorObject->db->listTabelas,$tab);
+            }
+            
+            $arquivo = __DIR__ . '/arquivo.json';
+            file_put_contents($arquivo, json_encode($executadorObject));
+
+
+
+
+       
+        ?>
 
         
         <script>
