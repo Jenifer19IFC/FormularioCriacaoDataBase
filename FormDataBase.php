@@ -108,7 +108,10 @@ session_start();
             
             $sgbd = new Sgbd();
 
-            $nomeSgbd = $_GET['nomeSgbd'];
+            if(!empty($_GET['nomeSgbd'])){
+              $nomeSgbd = $_GET['nomeSgbd'];
+            }
+            
             $sgbd->setNome($nomeSgbd);
             echo "<br><br>";
             $e = new Executador();
@@ -130,9 +133,6 @@ session_start();
             echo "<br><br>";
             var_dump($executadorSerealizado);
 
-            //Salva Executador em um arquivo Json
-            //$arquivo = __DIR__ . '/arquivo.json';
-            //file_put_contents($arquivo, json_encode($e));
 
         ?>
         <br><br>

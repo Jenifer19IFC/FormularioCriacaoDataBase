@@ -20,9 +20,9 @@ class Tabela{
 		return $this->listCampos;
 	}
 
-	//function setListCampos($listCampos = array()) {
-	///	$this->listCampos = $listCampos;
-	//}
+	function setListCampos($listCampos = array()) {
+		$this->listCampos = $listCampos;
+	}
 
 
 }
