@@ -96,7 +96,7 @@ var_dump($tabela);
            // echo "<br>";
             $op8= isset($_GET['op8']) ? $_GET['op8'] : "";
            // echo $op8;
-           $fimTabela = $op8= isset($_GET['fimTabela']) ? $_GET['fimTabela'] : "";
+           $fimTabela = isset($_GET['fimTabela']) ? $_GET['fimTabela'] : "";
             
             if(empty($tabela->listCampos)){
                 if(!($nomeCampo == null)){
@@ -164,10 +164,6 @@ var_dump($tabela);
 
                 }
                     
-                
-                
-               //    var_dump($executadorObject);
-        
             
             $arquivo = __DIR__ . '/arquivo.json';
             file_put_contents($arquivo, json_encode($executadorObject));
@@ -178,7 +174,12 @@ var_dump($tabela);
        
         ?>
 
-        
+    <br><br>
+  <a href="Itabela.php"> Adicionar tabelas</a>
+
+
+
+
         <script>
             //Add contador no name de tudo
             var cont = 1;
