@@ -7,25 +7,7 @@ require_once('Executador.php');
 require_once('Sgbd.php');
 
 session_start();
-
-$usuario = $_SESSION['usuario'];
-$senha = $_SESSION['senha'];
-$host = $_SESSION['host'];
-$porta = $_SESSION['porta'];
-$nomeDb = $_SESSION['nomeDb'];
-$nomeSgbd = $_SESSION['nomeSgbd'];
-
-print($usuario);
-echo "<br>";
-print($senha);
-echo "<br>";
-print($host);
-echo "<br>";
-print($porta);
-echo "<br>";
-print($nomeDb);
-echo "<br>";
-print($nomeSgbd);
+$executadorObject = unserialize($_SESSION['executadorObject']);
 
 $contTab = 0;
 
@@ -57,20 +39,34 @@ $contTab = 0;
         <?php
 
           $tab = isset($_GET['tab']) ? $_GET['tab'] : "";
-
-
-           //if (empty($_SESSION['tab'])) {
-            //    $_SESSION['tab'] = [];
-            //}
-
           
-              
-          $tabela = new Tabela();
-          $tabela->setNome($tab);
+          if(empty($executadorObject->db->listTabelas)){
+            if(!($tab == null)){
+              $tabela = new Tabela();
+              $tabela->setNome($tab);
+    
+              $tabelaSerializada = serialize($tabela);
+              $_SESSION['tabela'] = $tabelaSerializada;
+            }
+            
+          }else
+            $bExist = false;
+            for($i=0;$i < count($executadorObject->db->listTabelas); $i++){
+                if($executadorObject->db->listTabelas[$i]->getNome() ==  $tab){
+                    $bExist = true;
+                }
+            }
+          if($bExist == false){
+            if(!($tab == null)){
+                $tabela = new Tabela();
+                $tabela->setNome($tab);
+      
+                $tabelaSerializada = serialize($tabela);
+                $_SESSION['tabela'] = $tabelaSerializada;
+            }
+          }
 
-          $tabelaSerializada = serialize($tabela);
-          
-          $_SESSION['tabela'] = $tabelaSerializada;
+         
           var_dump($tabela);
           echo "<br>";
           var_dump($tabelaSerializada);

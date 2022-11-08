@@ -36,7 +36,6 @@ var_dump($tabela);
             <BR><BR>
             <div id="formularioC">
                 <div class="form-groupC">
-                <button type="button" id="add-campo"> ✖️ CAMPO</button><br><br>
                     <label>Nome do campo: </label>
                     <input type="text" name="nomeCampo" placeholder="Digite o nome do campo"><br>
                     <label>Tipo: </label>   
@@ -54,6 +53,8 @@ var_dump($tabela);
                         <br><input type="checkbox" name="op7" value="ai"> Incremento automático
                         <br><input type="checkbox" name="op8" value="g"> Coluna gerada
                         
+                        <br><br>
+                        <input type="text" name="fimTabela" placeholder="Preencha p/ finalizar tabela"><br>
                 </div>
             </div>
             <div class="form-groupC">
@@ -95,9 +96,10 @@ var_dump($tabela);
            // echo "<br>";
             $op8= isset($_GET['op8']) ? $_GET['op8'] : "";
            // echo $op8;
+           $fimTabela = $op8= isset($_GET['fimTabela']) ? $_GET['fimTabela'] : "";
             
             if(empty($tabela->listCampos)){
-                if(!empty($nomeCampo)){
+                if(!($nomeCampo == null)){
                     $campo = new Campo();
                     $campo->setNome($nomeCampo);
                     $campo->setTipo($tipo);
@@ -111,12 +113,18 @@ var_dump($tabela);
                     $campo->setG($op8);
                     
                     array_push($tabela->listCampos,$campo);
-                    array_push($executadorObject->db->listTabelas,$tabela);
+                    if(!($fimTabela == null)){
+                        array_push($executadorObject->db->listTabelas,$tabela);
+                    }
                     $tabelaSerializada = serialize($tabela);
                     $_SESSION['tabela'] = $tabelaSerializada;
                     echo "<br><br>";
                     var_dump( $_SESSION['tabela']);
                     echo "QUANDO LISTA VAZIA<BR>";
+                    $executadorSerealizado = serialize($executadorObject);
+                    $_SESSION['executadorObject'] = $executadorSerealizado;
+
+                
                 }
                 
             }else
@@ -126,29 +134,38 @@ var_dump($tabela);
                         $bExist = true;
                     }
                 }
-                if(!$bExist){
-                    $campo = new Campo();
-                    $campo->setNome($nomeCampo);
-                    $campo->setTipo($tipo);
-                    $campo->setPk($op1);
-                    $campo->setNn($op2);
-                    $campo->setUq($op3);
-                    $campo->setB($op4);
-                    $campo->setUn($op5);
-                    $campo->setZf($op6);
-                    $campo->setAi($op7);
-                    $campo->setG($op8);
-                    array_push($tabela->listCampos,$campo);
-                    array_push($executadorObject->db->listTabelas,$tabela);
-                    $tabelaSerializada = serialize($tabela);
-                    $_SESSION['tabela'] = $tabelaSerializada;
-                    echo "<br><br>";
-                    var_dump( $_SESSION['tabela']);
-                    echo "  QUANDO JÁ EXISTE<br>";
-                    ECHO "  ".count($executadorObject->db->listTabelas). "   <br>";
+                if($bExist == false){
+                    if(!($nomeCampo == null)){
+                        $campo = new Campo();
+                        $campo->setNome($nomeCampo);
+                        $campo->setTipo($tipo);
+                        $campo->setPk($op1);
+                        $campo->setNn($op2);
+                        $campo->setUq($op3);
+                        $campo->setB($op4);
+                        $campo->setUn($op5);
+                        $campo->setZf($op6);
+                        $campo->setAi($op7);
+                        $campo->setG($op8);
+                        array_push($tabela->listCampos,$campo);
+                        if(!($fimTabela == null)){
+                            array_push($executadorObject->db->listTabelas,$tabela);
+                        }
+                        $tabelaSerializada = serialize($tabela);
+                        $_SESSION['tabela'] = $tabelaSerializada;
+                        echo "<br><br>";
+                        var_dump( $_SESSION['tabela']);
+                        echo "  QUANDO JÁ EXISTE<br>";
+                        ECHO "  ".count($executadorObject->db->listTabelas). "   <br>";
+                        $executadorSerealizado = serialize($executadorObject);
+                        $_SESSION['executadorObject'] = $executadorSerealizado;
+                        
+                    }
 
                 }
-                        
+                    
+                
+                
                //    var_dump($executadorObject);
         
             
